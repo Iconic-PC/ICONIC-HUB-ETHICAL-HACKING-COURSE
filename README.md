@@ -1,32 +1,32 @@
 # Iconic Hub — Ethical Hacking Course
 
-**Secure, Build, Innovate.**
+**Secure. Build. Innovate.**
+
 **Where Web Development Meets Cybersecurity.**
 
 ---
 
 ## Course Information
 
-| Item                  | Details                      |
-| --------------------- | ---------------------------- |
-| **Course Code**       | `ICH-EH101`                  |
-| **Course Title**      | Ethical Hacking Fundamentals |
-| **Provider**          | Iconic Hub                   |
-| **Duration**          | 4 Weeks                      |
-| **Training Schedule** | 6 Labs per Week              |
-| **Total Labs**        | 24                           |
-| **Level**             | Beginner → Intermediate      |
-| **Delivery**          | Practical / Hands-on         |
+| Item           | Details                      |
+| -------------- | ---------------------------- |
+| **Provider**   | Iconic Hub                   |
+| **Course**     | Ethical Hacking Fundamentals |
+| **Duration**   | 4 Weeks                      |
+| **Schedule**   | 6 Labs per Week              |
+| **Total Labs** | 24                           |
+| **Level**      | Beginner → Intermediate      |
+| **Delivery**   | Practical / Hands-on         |
 
 ---
 
 ## Course Overview
 
-The **Iconic Hub Ethical Hacking Course** is a practical cybersecurity training program designed to introduce students to the fundamentals of ethical hacking, penetration testing, network security, web application security, vulnerability assessment, exploitation, privilege escalation, and security reporting.
+The **Iconic Hub Ethical Hacking Course** is a practical cybersecurity training program designed to introduce students to ethical hacking, cybersecurity fundamentals, reconnaissance, vulnerability assessment, web application security, exploitation, privilege escalation, and professional security reporting.
 
 The course combines foundational knowledge with hands-on laboratory exercises using controlled and authorized environments.
 
-Students will progressively move from cybersecurity fundamentals and Linux skills to reconnaissance, network scanning, vulnerability analysis, web application security, exploitation, privilege escalation, and professional security reporting.
+Students are expected to understand not only **how** to use security tools, but also **why** the tools are used, what their results mean, and how security findings should be documented.
 
 ---
 
@@ -35,133 +35,181 @@ Students will progressively move from cybersecurity fundamentals and Linux skill
 By the end of the course, students should be able to:
 
 * Explain fundamental cybersecurity concepts.
-* Understand the ethical and legal responsibilities of security testing.
+* Understand the ethical hacking process.
 * Work confidently with the Linux command line.
-* Understand Linux users, permissions, processes, and services.
-* Understand networking fundamentals and common protocols.
-* Perform reconnaissance and enumeration in authorized environments.
-* Use security tools such as Nmap appropriately.
-* Identify and analyze common vulnerabilities.
+* Understand basic networking and network services.
+* Perform authorized reconnaissance and enumeration.
+* Identify potential vulnerabilities in controlled environments.
+* Perform basic vulnerability assessment.
 * Understand common web application vulnerabilities.
-* Perform controlled exploitation in intentionally vulnerable environments.
-* Understand basic Linux and Windows privilege escalation concepts.
+* Use security testing tools responsibly.
+* Understand basic exploitation concepts.
+* Perform introductory privilege escalation exercises in labs.
 * Collect and document security evidence.
-* Produce professional penetration-testing and vulnerability reports.
-* Recommend appropriate security remediation.
+* Produce professional penetration-testing-style reports.
+* Apply ethical and legal principles throughout security testing.
 
 ---
 
 # Course Structure
 
-The course is divided into four modules.
+## ICH-EH101 — Cybersecurity Fundamentals & Ethical Hacking
 
-| Module        | Focus                                          |
-| ------------- | ---------------------------------------------- |
-| **Module 01** | Cybersecurity, Linux & Networking Foundations  |
-| **Module 02** | Reconnaissance & Vulnerability Assessment      |
-| **Module 03** | Web Application Security                       |
-| **Module 04** | Exploitation, Privilege Escalation & Reporting |
+**Week 1**
 
----
+| Lab       | Topic                                                               |
+| --------- | ------------------------------------------------------------------- |
+| **Lab 1** | [Introduction to Cybersecurity & Ethical Hacking](./WEEK_1/lab1.md) |
+| **Lab 2** | [Linux Command Line Fundamentals](./WEEK_1/lab2.md)                 |
+| **Lab 3** | [Linux for Ethical Hackers](./WEEK_1/lab3.md)                       |
+| **Lab 4** | [Networking Fundamentals](./WEEK_1/lab4.md)                         |
+| **Lab 5** | [Nmap](./WEEK_1/lab5.md)                                            |
+| **Lab 6** | [Reconnaissance & Enumeration](./WEEK_1/lab6.md)                    |
 
-# Module 01 — Cybersecurity, Linux & Networking Foundations
+### Course Focus
 
-**Module Code:** `ICH-EH101-M01`
+This course establishes the foundations required for ethical hacking, including:
 
-This module establishes the foundation required for ethical hacking and penetration testing.
-
-| Lab       | Lab Title                                                           | Description                                                                                                                                | Status    |
-| --------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | --------- |
-| **Lab 1** | [Introduction to Cybersecurity & Ethical Hacking](./WEEK_1/day1.md) | Cybersecurity fundamentals, CIA Triad, threats, vulnerabilities, risk, ethical hacking, authorization and penetration-testing methodology. | Mandatory |
-| **Lab 2** | [Linux Command Line Fundamentals](./WEEK_1/day2.md)                 | Linux filesystem, navigation, files, directories, text processing, searching, pipes and basic lab organization.                            | Mandatory |
-| **Lab 3** | [Linux for Ethical Hackers](./WEEK_1/day3.md)                       | Users, groups, privileges, permissions, ownership, processes, services and basic host enumeration.                                         | Mandatory |
-| **Lab 4** | Networking Fundamentals                                             | IP addressing, ports, protocols, TCP/IP, DNS, HTTP and network architecture.                                                               | Mandatory |
-| **Lab 5** | Nmap                                                                | Network discovery, port scanning, service detection and authorized network enumeration.                                                    | Mandatory |
-| **Lab 6** | Reconnaissance & Enumeration                                        | Information gathering, target profiling and enumeration methodology.                                                                       | Mandatory |
-
----
-
-# Module 02 — Reconnaissance & Vulnerability Assessment
-
-**Module Code:** `ICH-EH101-M02`
-
-This module introduces students to structured reconnaissance, enumeration and vulnerability assessment.
-
-| Lab        | Lab Title                    | Description                                                                 | Status    |
-| ---------- | ---------------------------- | --------------------------------------------------------------------------- | --------- |
-| **Lab 7**  | Passive Reconnaissance       | Public information gathering and target profiling using authorized sources. | Mandatory |
-| **Lab 8**  | Active Reconnaissance        | Controlled discovery and interaction with authorized lab targets.           | Mandatory |
-| **Lab 9**  | Service Enumeration          | Identifying and analyzing exposed network services.                         | Mandatory |
-| **Lab 10** | Vulnerability Assessment     | Identifying, validating and prioritizing security weaknesses.               | Mandatory |
-| **Lab 11** | Vulnerability Scanning       | Understanding automated vulnerability assessment and interpreting results.  | Mandatory |
-| **Lab 12** | Recon-to-Assessment Workflow | Combining reconnaissance, scanning, enumeration and vulnerability analysis. | Mandatory |
+* Cybersecurity fundamentals
+* Information security
+* CIA Triad
+* Threats and vulnerabilities
+* Risk
+* Security controls
+* Ethical hacking
+* Authorization and scope
+* Linux
+* Linux permissions
+* Networking
+* Nmap
+* Basic reconnaissance
+* Enumeration
 
 ---
 
-# Module 03 — Web Application Security
+# ICH-EH102 — Reconnaissance & Vulnerability Assessment
 
-**Module Code:** `ICH-EH101-M03`
+**Week 2**
 
-This module introduces common web technologies and vulnerabilities through intentionally vulnerable applications and authorized laboratory environments.
+| Lab        | Topic                                             |
+| ---------- | ------------------------------------------------- |
+| **Lab 7**  | [Passive Reconnaissance](./WEEK_2/lab7.md)        |
+| **Lab 8**  | [Active Reconnaissance](./WEEK_2/lab8.md)         |
+| **Lab 9**  | [Service Enumeration](./WEEK_2/lab9.md)           |
+| **Lab 10** | [Vulnerability Assessment](./WEEK_2/lab10.md)     |
+| **Lab 11** | [Vulnerability Scanning](./WEEK_2/lab11.md)       |
+| **Lab 12** | [Recon-to-Assessment Workflow](./WEEK_2/lab12.md) |
 
-| Lab        | Lab Title                         | Description                                                                         | Status    |
-| ---------- | --------------------------------- | ----------------------------------------------------------------------------------- | --------- |
-| **Lab 13** | HTTP & Web Technologies           | HTTP requests, responses, methods, headers, cookies, sessions and web architecture. | Mandatory |
-| **Lab 14** | Burp Suite Fundamentals           | Intercepting, inspecting and modifying HTTP traffic in an authorized lab.           | Mandatory |
-| **Lab 15** | SQL Injection                     | Understanding SQL injection and safely testing vulnerable applications.             | Mandatory |
-| **Lab 16** | Cross-Site Scripting              | Understanding reflected, stored and DOM-based XSS concepts.                         | Mandatory |
-| **Lab 17** | Authentication & Access Control   | Authentication weaknesses, session security and broken access control.              | Mandatory |
-| **Lab 18** | File Upload & Web Vulnerabilities | Understanding insecure file uploads and related web application weaknesses.         | Mandatory |
+### Course Focus
+
+Students learn how information is collected and analyzed during an authorized security assessment.
+
+Topics include:
+
+* Passive reconnaissance
+* Active reconnaissance
+* OSINT fundamentals
+* DNS reconnaissance
+* Domain and subdomain discovery
+* Service enumeration
+* Banner grabbing
+* Vulnerability identification
+* Vulnerability scanning
+* Risk interpretation
+* Reconnaissance-to-assessment workflow
 
 ---
 
-# Module 04 — Exploitation, Privilege Escalation & Reporting
+# ICH-EH103 — Web Application Security
 
-**Module Code:** `ICH-EH101-M04`
+**Week 3**
 
-This module introduces controlled exploitation, privilege escalation, post-exploitation concepts and professional security reporting.
+| Lab        | Topic                                                  |
+| ---------- | ------------------------------------------------------ |
+| **Lab 13** | [HTTP & Web Technologies](./WEEK_3/lab13.md)           |
+| **Lab 14** | [Burp Suite Fundamentals](./WEEK_3/lab14.md)           |
+| **Lab 15** | [SQL Injection](./WEEK_3/lab15.md)                     |
+| **Lab 16** | [Cross-Site Scripting](./WEEK_3/lab16.md)              |
+| **Lab 17** | [Authentication & Access Control](./WEEK_3/lab17.md)   |
+| **Lab 18** | [File Upload & Web Vulnerabilities](./WEEK_3/lab18.md) |
 
-| Lab        | Lab Title                    | Description                                                                                      | Status    |
-| ---------- | ---------------------------- | ------------------------------------------------------------------------------------------------ | --------- |
-| **Lab 19** | Exploitation Fundamentals    | Understanding controlled exploitation and validating vulnerabilities in authorized environments. | Mandatory |
-| **Lab 20** | Linux Privilege Escalation   | Identifying common Linux privilege-escalation opportunities in a controlled lab.                 | Mandatory |
-| **Lab 21** | Windows Privilege Escalation | Understanding common Windows privilege-escalation concepts and assessment techniques.            | Mandatory |
-| **Lab 22** | Post-Exploitation & Evidence | Understanding post-exploitation objectives, evidence collection and maintaining scope.           | Mandatory |
-| **Lab 23** | Penetration Testing Reports  | Documenting findings, evidence, impact, risk and remediation.                                    | Mandatory |
-| **Lab 24** | Final Practical Assessment   | End-to-end authorized security assessment combining the major course concepts.                   | Mandatory |
+### Course Focus
+
+Students learn the fundamentals of web application security and how common vulnerabilities are identified in controlled environments.
+
+Topics include:
+
+* HTTP and HTTPS
+* Requests and responses
+* HTTP methods
+* Headers
+* Cookies
+* Sessions
+* Parameters
+* Burp Suite
+* SQL injection
+* Cross-site scripting
+* Authentication
+* Authorization
+* Access control
+* File upload security
+* Common web application vulnerabilities
+
+---
+
+# ICH-EH104 — Exploitation, Privilege Escalation & Reporting
+
+**Week 4**
+
+| Lab        | Topic                                             |
+| ---------- | ------------------------------------------------- |
+| **Lab 19** | [Exploitation Fundamentals](./WEEK_4/lab19.md)    |
+| **Lab 20** | [Linux Privilege Escalation](./WEEK_4/lab20.md)   |
+| **Lab 21** | [Windows Privilege Escalation](./WEEK_4/lab21.md) |
+| **Lab 22** | [Post-Exploitation & Evidence](./WEEK_4/lab22.md) |
+| **Lab 23** | [Penetration Testing Reports](./WEEK_4/lab23.md)  |
+| **Lab 24** | [Final Practical Assessment](./WEEK_4/lab24.md)   |
+
+### Course Focus
+
+The final course brings together the skills developed throughout the program.
+
+Topics include:
+
+* Exploitation fundamentals
+* Exploit validation
+* Linux privilege escalation
+* Windows privilege escalation
+* Post-exploitation concepts
+* Evidence collection
+* Security documentation
+* Penetration testing reports
+* Recommendations and remediation
+* Final practical assessment
 
 ---
 
 # Ethical Hacking & Authorization
 
-All practical activities in this course must be performed only against systems where the student has explicit authorization.
+All practical activities in this course must be performed against systems that the student owns, intentionally vulnerable laboratory environments, classroom infrastructure, or systems for which explicit authorization has been provided.
 
-Acceptable environments include:
+Students must **not** scan, exploit, attack, or attempt unauthorized access to:
 
-* Personal computers
-* Personal virtual machines
-* Intentionally vulnerable applications
-* Isolated cybersecurity laboratories
-* Classroom-provided targets
-* Systems for which explicit written authorization has been provided
+* Random public websites
+* School or university systems
+* Government systems
+* Company infrastructure
+* Third-party servers
+* Other people's devices
+* Public IP addresses without authorization
 
-### Students must not:
-
-* Scan random public IP addresses.
-* Attack websites without permission.
-* Test school, company or government systems without authorization.
-* Access accounts belonging to other people.
-* Attempt to bypass security controls on unauthorized systems.
-* Perform destructive attacks.
-* Access or extract unnecessary sensitive information.
-
-> **Learning cybersecurity does not automatically give you permission to test someone else's system.**
+Authorization and scope must always be established before security testing begins.
 
 ---
 
-# Core Ethical Hacking Methodology
+# Ethical Hacking Methodology
 
-The course follows this general methodology:
+The course follows a simplified penetration-testing workflow:
 
 ```text
 Authorization
@@ -174,110 +222,119 @@ Enumeration
       ↓
 Vulnerability Analysis
       ↓
-Controlled Exploitation
+Exploitation
       ↓
-Privilege Escalation / Post-Exploitation
+Privilege Escalation
       ↓
-Evidence Collection
+Post-Exploitation
+      ↓
+Evidence & Documentation
       ↓
 Reporting
       ↓
-Remediation
-      ↓
-Retesting
+Remediation & Retesting
 ```
 
-Students will progressively apply this methodology throughout the course.
+The exact workflow may vary depending on the engagement and scope.
 
 ---
 
 # Course Highlights
 
-* Practical cybersecurity training
-* Linux fundamentals
-* Networking fundamentals
-* Reconnaissance and enumeration
+Students will gain practical exposure to:
+
+* Linux
+* Networking
 * Nmap
+* Reconnaissance
+* Enumeration
 * Vulnerability assessment
-* Web application security
+* Vulnerability scanning
 * Burp Suite
+* Web application security
 * SQL injection
 * Cross-site scripting
-* Authentication and access control
-* File-upload security
-* Controlled exploitation
-* Linux privilege escalation
-* Windows privilege escalation
+* Authentication testing
+* Access-control testing
+* Exploitation fundamentals
+* Privilege escalation
 * Evidence collection
-* Penetration-testing methodology
-* Professional security reporting
+* Security reporting
 
 ---
 
 # Recommended Lab Environment
 
-Students should have access to an isolated laboratory environment.
+Students should use an isolated and controlled environment.
 
 Recommended setup:
 
-* Kali Linux
-* VirtualBox or VMware
-* A deliberately vulnerable target machine/application
-* Sufficient RAM and storage
-* Host-only or isolated networking where appropriate
+```text
+Host Computer
+      │
+      ├── Kali Linux
+      │
+      └── Intentionally Vulnerable Lab VM
+```
 
-Students should avoid using production systems for experimentation.
+Examples of suitable laboratory environments include intentionally vulnerable machines and applications designed for security training.
+
+Students should avoid testing against systems that they do not own or have explicit permission to assess.
 
 ---
 
 # Lab Requirements
 
-Students are expected to:
+Students should have:
 
-* Attend each laboratory session.
-* Complete practical exercises.
-* Document important findings.
-* Capture relevant screenshots/evidence.
-* Complete assigned exercises.
-* Follow authorization and scope requirements.
-* Maintain organized notes.
-* Submit practical assignments when required.
+* A computer capable of running virtual machines
+* VirtualBox or another virtualization platform
+* Kali Linux
+* An intentionally vulnerable laboratory environment
+* Basic internet access for downloading legitimate tools and documentation
+* Sufficient storage for virtual machines
+* A GitHub account for documentation
+* A screenshot tool for recording practical evidence
 
 ---
 
 # Evidence & Documentation
 
-Students should learn to document their work from the beginning.
+Students should document practical work throughout the course.
 
-Where appropriate, evidence may include:
+Useful evidence may include:
 
 * Terminal output
 * Tool results
 * Screenshots
+* Configuration information
 * Network diagrams
-* HTTP requests/responses
-* Vulnerability evidence
-* Findings tables
-* Remediation recommendations
+* Vulnerability findings
+* Evidence of successful lab tasks
+* Notes explaining observations
 
-Evidence should be collected responsibly and should not expose unnecessary sensitive information.
+Screenshots should show enough context to demonstrate what was performed.
+
+Do not expose passwords, private credentials, personal information, or sensitive organizational information in public documentation.
 
 ---
 
 # Completion
 
-Students who successfully complete the course should have practical exposure to the fundamental stages of an ethical-hacking assessment:
+Students who complete the required labs and final practical assessment will have worked through the core stages of an introductory ethical hacking workflow.
 
-**Understand → Discover → Analyze → Test → Document → Remediate → Retest**
+The goal is not simply to memorize commands.
 
-The goal is not simply to learn security tools.
+The goal is to understand:
 
-The goal is to understand **why**, **when**, and **how** security techniques are used within an authorized assessment.
+> **What am I testing? Why am I testing it? What does the result mean? What security impact does it have? How should it be documented and fixed?**
 
 ---
 
 ## Iconic Hub
 
-**Secure, Build, Innovate.**
+**Secure. Build. Innovate.**
 
 **Where Web Development Meets Cybersecurity.**
+
+© Iconic Hub
