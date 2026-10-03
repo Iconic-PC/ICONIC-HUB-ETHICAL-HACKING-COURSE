@@ -57,14 +57,14 @@ By the end of the course, students should be able to:
 
 **Week 1**
 
-| Lab       | Topic                                                               |
-| --------- | ------------------------------------------------------------------- |
-| **Lab 1** | [Introduction to Cybersecurity & Ethical Hacking](./WEEK_1/lab1.md) |
-| **Lab 2** | [Linux Command Line Fundamentals](./WEEK_1/lab2.md)                 |
-| **Lab 3** | [Linux for Ethical Hackers](./WEEK_1/lab3.md)                       |
-| **Lab 4** | [Networking Fundamentals](./WEEK_1/lab4.md)                         |
-| **Lab 5** | [Nmap](./WEEK_1/lab5.md)                                            |
-| **Lab 6** | [Reconnaissance & Enumeration](./WEEK_1/lab6.md)                    |
+| **Lab**   | **Topic**                                                                                                                                          |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Lab 1** | [Introduction to Cybersecurity & Ethical Hacking](./ICH-EH101/Lab%201%20-%20Introduction%20to%20Cybersecurity%20%26%20Ethical%20Hacking/README.md) |
+| **Lab 2** | [Linux Command Line Fundamentals](./ICH-EH101/Lab%202%20-%20Linux%20Command%20Line%20Fundamentals/README.md)                                       |
+| **Lab 3** | [Linux for Ethical Hackers](./ICH-EH101/Lab%203%20-%20Linux%20for%20Ethical%20Hackers/README.md)                                                   |
+| **Lab 4** | [Networking Fundamentals](./ICH-EH101/Lab%204%20-%20Networking%20Fundamentals/README.md)                                                           |
+| **Lab 5** | [Nmap](./ICH-EH101/Lab%205%20-%20Nmap/README.md)                                                                                                   |
+| **Lab 6** | [Reconnaissance & Enumeration](./ICH-EH101/Lab%206%20-%20Reconnaissance%20%26%20Enumeration/README.md)                                             |
 
 ### Course Focus
 
@@ -91,14 +91,14 @@ This course establishes the foundations required for ethical hacking, including:
 
 **Week 2**
 
-| Lab        | Topic                                             |
-| ---------- | ------------------------------------------------- |
-| **Lab 7**  | [Passive Reconnaissance](./WEEK_2/lab7.md)        |
-| **Lab 8**  | [Active Reconnaissance](./WEEK_2/lab8.md)         |
-| **Lab 9**  | [Service Enumeration](./WEEK_2/lab9.md)           |
-| **Lab 10** | [Vulnerability Assessment](./WEEK_2/lab10.md)     |
-| **Lab 11** | [Vulnerability Scanning](./WEEK_2/lab11.md)       |
-| **Lab 12** | [Recon-to-Assessment Workflow](./WEEK_2/lab12.md) |
+| **Lab**    | **Topic**                                                                                           |
+| ---------- | --------------------------------------------------------------------------------------------------- |
+| **Lab 7**  | [Passive Reconnaissance](./ICH-EH102/Lab%207%20-%20Passive%20Reconnaissance/README.md)              |
+| **Lab 8**  | [Active Reconnaissance](./ICH-EH102/Lab%208%20-%20Active%20Reconnaissance/README.md)                |
+| **Lab 9**  | [Service Enumeration](./ICH-EH102/Lab%209%20-%20Service%20Enumeration/README.md)                    |
+| **Lab 10** | [Vulnerability Assessment](./ICH-EH102/Lab%2010%20-%20Vulnerability%20Assessment/README.md)         |
+| **Lab 11** | [Vulnerability Scanning](./ICH-EH102/Lab%2011%20-%20Vulnerability%20Scanning/README.md)             |
+| **Lab 12** | [Recon-to-Assessment Workflow](./ICH-EH102/Lab%2012%20-%20Recon-to-Assessment%20Workflow/README.md) |
 
 ### Course Focus
 
@@ -124,14 +124,14 @@ Topics include:
 
 **Week 3**
 
-| Lab        | Topic                                                  |
-| ---------- | ------------------------------------------------------ |
-| **Lab 13** | [HTTP & Web Technologies](./WEEK_3/lab13.md)           |
-| **Lab 14** | [Burp Suite Fundamentals](./WEEK_3/lab14.md)           |
-| **Lab 15** | [SQL Injection](./WEEK_3/lab15.md)                     |
-| **Lab 16** | [Cross-Site Scripting](./WEEK_3/lab16.md)              |
-| **Lab 17** | [Authentication & Access Control](./WEEK_3/lab17.md)   |
-| **Lab 18** | [File Upload & Web Vulnerabilities](./WEEK_3/lab18.md) |
+| **Lab**    | **Topic**                                                                                                             |
+| ---------- | --------------------------------------------------------------------------------------------------------------------- |
+| **Lab 13** | [HTTP & Web Technologies](./ICH-EH103/Lab%2013%20-%20HTTP%20%26%20Web%20Technologies/README.md)                       |
+| **Lab 14** | [Burp Suite Fundamentals](./ICH-EH103/Lab%2014%20-%20Burp%20Suite%20Fundamentals/README.md)                           |
+| **Lab 15** | [SQL Injection](./ICH-EH103/Lab%2015%20-%20SQL%20Injection/README.md)                                                 |
+| **Lab 16** | [Cross-Site Scripting](./ICH-EH103/Lab%2016%20-%20Cross-Site%20Scripting/README.md)                                   |
+| **Lab 17** | [Authentication & Access Control](./ICH-EH103/Lab%2017%20-%20Authentication%20%26%20Access%20Control/README.md)       |
+| **Lab 18** | [File Upload & Web Vulnerabilities](./ICH-EH103/Lab%2018%20-%20File%20Upload%20%26%20Web%20Vulnerabilities/README.md) |
 
 ### Course Focus
 
@@ -161,14 +161,14 @@ Topics include:
 
 **Week 4**
 
-| Lab        | Topic                                             |
-| ---------- | ------------------------------------------------- |
-| **Lab 19** | [Exploitation Fundamentals](./WEEK_4/lab19.md)    |
-| **Lab 20** | [Linux Privilege Escalation](./WEEK_4/lab20.md)   |
-| **Lab 21** | [Windows Privilege Escalation](./WEEK_4/lab21.md) |
-| **Lab 22** | [Post-Exploitation & Evidence](./WEEK_4/lab22.md) |
-| **Lab 23** | [Penetration Testing Reports](./WEEK_4/lab23.md)  |
-| **Lab 24** | [Final Practical Assessment](./WEEK_4/lab24.md)   |
+| **Lab**    | **Topic**                                                                                               |
+| ---------- | ------------------------------------------------------------------------------------------------------- |
+| **Lab 19** | [Exploitation Fundamentals](./ICH-EH104/Lab%2019%20-%20Exploitation%20Fundamentals/README.md)           |
+| **Lab 20** | [Linux Privilege Escalation](./ICH-EH104/Lab%2020%20-%20Linux%20Privilege%20Escalation/README.md)       |
+| **Lab 21** | [Windows Privilege Escalation](./ICH-EH104/Lab%2021%20-%20Windows%20Privilege%20Escalation/README.md)   |
+| **Lab 22** | [Post-Exploitation & Evidence](./ICH-EH104/Lab%2022%20-%20Post-Exploitation%20%26%20Evidence/README.md) |
+| **Lab 23** | [Penetration Testing Reports](./ICH-EH104/Lab%2023%20-%20Penetration%20Testing%20Reports/README.md)     |
+| **Lab 24** | [Final Practical Assessment](./ICH-EH104/Lab%2024%20-%20Final%20Practical%20Assessment/README.md)       |
 
 ### Course Focus
 
