@@ -1,13 +1,13 @@
-# Lab 1 — Introduction to Cybersecurity & Ethical Hacking
+Lab 1 — Introduction to Cybersecurity & Ethical Hacking
 
-**Course Code:** ICH-EH101
-**Course Title:** Cybersecurity Fundamentals & Ethical Hacking
-**Provider:** Iconic Hub
-**Week:** 1
-**Lab:** 1
+Course Code: ICH-EH101
+Course Title: Cybersecurity Fundamentals & Ethical Hacking
+Provider: Iconic Hub
+Week: 1
+Lab: 1
 
-> **Secure. Build. Innovate.**
-> *Where Web Development Meets Cybersecurity.*
+Secure. Build. Innovate.
+Where Web Development Meets Cybersecurity.
 
 ---
 
