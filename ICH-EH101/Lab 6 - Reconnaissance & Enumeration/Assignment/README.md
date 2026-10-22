@@ -1,254 +1,296 @@
-21. TAKE-HOME ASSIGNMENT
+# ICH-EH101 — LAB 6 ASSIGNMENT
+## Reconnaissance and Enumeration of the OWASP Virtual Machine
 
-Title: Basic Reconnaissance and Enumeration Report
+**Institution:** Iconic Hub  
+**Course:** ICH-EH101 — Ethical Hacking  
+**Assignment:** Lab 6  
+**Topic:** Reconnaissance and Enumeration  
+**Target:** OWASP Virtual Machine running in VirtualBox  
+**Testing Machine:** Kali Linux  
+**Total Marks:** 100  
+**Submission:** Practical report with screenshots and analysis
 
-Objective: Demonstrate an understanding of reconnaissance, enumeration, and the use of basic Linux networking tools.
+---
 
-Part A: Definitions
+## 1. Assignment Objective
 
-Explain the following terms in your own words:
+The purpose of this assignment is to assess your ability to gather information about an authorized target, discover its exposed network services, interpret technical results, and document your findings professionally.
 
-Reconnaissance.
+You are required to use Kali Linux to investigate the OWASP virtual machine provided for this class.
 
-Enumeration.
+You must perform the practical exercises yourself and submit genuine screenshots showing your commands and results.
 
-Passive reconnaissance.
+## 2. Scenario
 
-Active reconnaissance.
+You have been assigned the role of a junior penetration tester at Iconic Hub. Your supervisor has provided an OWASP virtual machine for an internal security assessment.
 
-IP address.
+Before any vulnerability testing begins, your supervisor requires you to perform reconnaissance and enumeration to understand the target's network presence and exposed services.
 
-Port.
+Your task is to conduct the initial assessment, record your findings, and prepare a report explaining what you discovered.
 
-Service.
+**Authorized scope:** Only the OWASP VM provided for this lab. Do not scan unrelated machines, public websites, or systems outside the authorized lab environment.
 
-DNS.
+---
 
-Part B: Practical Evidence
+## 3. Practical Tasks
 
-Using your own Kali Linux lab, provide evidence for the following:
+### Task 1: Identify the target and document the lab environment — 10 marks
 
-Identify your hostname using hostname.
+1. Start Kali Linux and the OWASP VM in VirtualBox.
+2. Open a terminal inside the OWASP VM.
+3. Run:
 
-Identify your Linux distribution using cat /etc/os-release.
+   ```bash
+   ip addr
+   ```
 
-Display your network interfaces using ip addr.
+4. Identify and record the OWASP VM's actual IPv4 address.
+5. Run the same command inside Kali Linux.
+6. Record Kali's IP address separately.
+7. Briefly explain the purpose of each machine in the lab.
 
-Display your routing table using ip route.
+**Required evidence:** Screenshots showing the IP configuration of both VMs.
 
-Check local listening sockets using ss -tuln.
+**Questions to answer:**
+- What is the OWASP VM's IPv4 address?
+- What is Kali's IPv4 address?
+- Why is it important not to confuse the target IP with the testing machine's IP?
 
-Run the local host discovery command nmap -sn 127.0.0.1.
+### Task 2: Test connectivity — 10 marks
 
-Scan local web ports using nmap -p 80,443,8080 127.0.0.1.
+From Kali Linux, run the following command, replacing `TARGET_IP` with the actual OWASP VM address:
 
-Perform service detection using nmap -sV -p 80,443,8080 127.0.0.1.
+```bash
+ping -c 4 TARGET_IP
+```
 
-Verify Apache2 status.
+Record the output and determine whether the target responds to ICMP requests.
 
-Inspect the HTTP response from your existing DVWA installation.
+If the command fails, investigate the VM's network configuration and document what you found. Do not fabricate a successful result.
 
-If your DVWA installation uses a different URL, document the URL you actually used.
+**Required evidence:** A screenshot showing the command and its output.
 
-Part C: Findings
+**Questions to answer:**
+- Did the target respond?
+- What does a successful ping indicate?
+- Does a failed ping necessarily mean the target is offline? Explain.
 
-Prepare a table containing at least five observations from your lab.
+### Task 3: Perform host discovery — 10 marks
 
-No.
+From Kali, run:
 
-Observation
+```bash
+nmap -sn TARGET_IP
+```
 
-What it means
+Replace `TARGET_IP` with the correct target address.
 
-Recommended action
+Record the result and explain what Nmap reports about the target's availability.
 
-1
+**Required evidence:** A screenshot of the Nmap command and output.
 
+**Questions to answer:**
+- What is the purpose of the `-sn` option?
+- Did Nmap identify the host as up?
+- How is host discovery different from port scanning?
 
+### Task 4: Scan selected TCP ports — 20 marks
 
+Run the following command against the authorized OWASP VM:
 
+```bash
+nmap -p 21,22,23,25,53,80,110,139,143,443,445,3306,8080 TARGET_IP
+```
 
+Record the results in a table.
 
+| Port | State | Reported service | Your interpretation |
+|---|---|---|---|
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
 
-2
+Include only the ports and results actually reported by your scan.
 
+**Required evidence:** A screenshot showing the port scan and results.
 
+**Questions to answer:**
+- Which ports were reported as open?
+- Which were closed or filtered, if any?
+- What is the difference between an open, closed, and filtered port?
+- Does an open port automatically indicate a vulnerability? Explain.
 
+### Task 5: Perform service and version detection — 15 marks
 
+Run:
 
+```bash
+nmap -sV -p 21,22,23,25,53,80,110,139,143,443,445,3306,8080 TARGET_IP
+```
 
+Document any service names or version details Nmap reports.
 
-3
+| Port | Service identified | Version information | Notes |
+|---|---|---|---|
+| | | | |
+| | | | |
+| | | | |
 
+If Nmap does not identify a version, write **"Not identified"** rather than guessing.
 
+**Required evidence:** A screenshot of the service-detection results.
 
+**Questions to answer:**
+- What does the `-sV` option do?
+- Did service detection provide more information than the basic port scan?
+- Why should a reported version be verified before concluding that a vulnerability exists?
 
+### Task 6: Inspect an exposed web service — 10 marks
 
+If your scan identifies an open web port, open Firefox in Kali and visit the target using the appropriate address.
 
+For example, if port 80 is open:
 
-4
+```text
+http://TARGET_IP/
+```
 
+If the web service is running on port 8080, use:
 
+```text
+http://TARGET_IP:8080/
+```
 
+Replace the example IP with the actual OWASP VM address.
 
+Record the page or response you observe.
 
+**Required evidence:** A screenshot of the browser showing the target address and the page returned.
 
+**Questions to answer:**
+- Was a web page accessible?
+- Which port did you use?
+- What did the page reveal about the target?
+- What can you not conclude from the page alone?
 
-5
+If no web service is available on the scanned ports, document that result and ask your instructor for guidance.
 
+### Task 7: Save scan results and interpret your findings — 10 marks
 
+Create a folder for your assignment:
 
+```bash
+mkdir -p ~/ICH-EH101/Lab6_Assignment
+```
 
+Save the selected-port scan:
 
+```bash
+nmap -p 21,22,23,25,53,80,110,139,143,443,445,3306,8080 -oN ~/ICH-EH101/Lab6_Assignment/port-scan.txt TARGET_IP
+```
 
+Save the service-detection scan:
 
-Do not invent results. Your report must reflect what your own system displayed.
+```bash
+nmap -sV -p 21,22,23,25,53,80,110,139,143,445,443,3306,8080 -oN ~/ICH-EH101/Lab6_Assignment/service-scan.txt TARGET_IP
+```
 
-Part D: Short Discussion
+Check that your files exist:
 
-Answer the following:
+```bash
+ls -l ~/ICH-EH101/Lab6_Assignment
+```
 
-What information did reconnaissance reveal about your system?
+Review the results and write a short analysis that distinguishes:
 
-What additional information did enumeration provide?
+- What you observed.
+- What the observations suggest.
+- What remains unconfirmed.
+- What you would investigate next within the authorized scope.
 
-Did you identify any open ports?
+**Required evidence:** A screenshot showing the saved output files and at least one saved scan result.
 
-What services were identified, if any?
+### Task 8: Explain reconnaissance and enumeration — 5 marks
 
-Why is it important to verify findings instead of assuming that every result is a vulnerability?
+Answer in your own words:
 
-What would you recommend to improve the security of your lab machine?
+1. What is reconnaissance?
+2. What is enumeration?
+3. Give two differences between them.
+4. Explain how the practical exercises demonstrated both activities.
 
-Part E: Conclusion
+---
 
-Write one paragraph explaining what you learned and why reconnaissance and enumeration are important in ethical hacking.
+## 4. Final Report Requirements
 
-Submission Requirements
+Submit one organized report using the following headings:
 
-Use clear headings.
+1. Cover page.
+2. Introduction.
+3. Objectives.
+4. Lab environment and authorized scope.
+5. Target IP identification.
+6. Connectivity testing.
+7. Host discovery.
+8. Port-scanning results.
+9. Service-detection results.
+10. Web-service observations.
+11. Findings and analysis.
+12. Limitations.
+13. Conclusion.
+14. Screenshot appendix.
 
-Include screenshots of actual command output.
+Your report must explain the results rather than simply pasting terminal output.
 
-Explain what each screenshot demonstrates.
+## 5. Screenshot Requirements
 
-Include the commands used.
+Submit at least six genuine screenshots:
 
-Do not include passwords, tokens, or other secrets.
+- Kali IP configuration.
+- OWASP VM IP configuration.
+- Connectivity test.
+- Nmap host discovery.
+- Nmap port scan.
+- Nmap service detection.
+- Web application, if available.
+- Saved scan files.
 
-Do not scan public systems for this assignment.
+You may include more than six screenshots. Ensure the commands, target address, and relevant output are readable.
 
-Submit the report in Markdown or PDF, as directed by the instructor.
+## 6. Marking Scheme
 
-22. ASSESSMENT RUBRIC
+| Assessment area | Marks |
+|---|---:|
+| Target identification and lab documentation | 10 |
+| Connectivity testing | 10 |
+| Host discovery | 10 |
+| TCP port scanning | 20 |
+| Service and version detection | 15 |
+| Web-service inspection | 10 |
+| Saved results and interpretation | 10 |
+| Explanation of reconnaissance and enumeration | 5 |
+| Report quality, evidence, and responsible testing | 10 |
+| **Total** | **100** |
 
-Assessment area
+## 7. Submission Rules
 
-Marks
+- Perform all scans from Kali Linux against the assigned OWASP VM.
+- Replace every `TARGET_IP` placeholder with the actual target IP.
+- Submit your own results and screenshots.
+- Do not copy another student's report.
+- Do not invent open ports, service versions, or scan results.
+- If a command fails, document the error and explain your troubleshooting.
+- Do not claim to have discovered a vulnerability solely because a port is open.
+- Do not scan public systems or unrelated machines.
 
-Understanding reconnaissance and enumeration
+## 8. Final Reflection
 
-20
+Conclude your report by answering:
 
-Understanding networking concepts
+**"Based on your reconnaissance and enumeration results, what have you learned about the OWASP VM, and what additional information would you need before conducting a vulnerability assessment?"**
 
-15
+Your answer should refer to your actual findings and demonstrate that you understand the difference between gathering information and proving a security weakness.
 
-Correct use of Linux commands and Nmap
-
-25
-
-Practical findings and explanations
-
-20
-
-Screenshots and report quality
-
-10
-
-Authorization and ethical conduct
-
-10
-
-Total
-
-100
-
-Students should be assessed on their understanding and the accuracy of their evidence, not merely on whether they can copy commands.
-
-23. LAB REPORT TEMPLATE
-
-Students may use the following template for their submission.
-
-Reconnaissance and Enumeration Report
-
-Student Name:
-Course: ICH-EH101
-Lab Number: 06
-Date: October 23, 2026
-Target: Local Kali Linux lab
-Authorization: Instructor-approved local environment
-
-1. Objective
-
-Explain the purpose of the exercise.
-
-2. Tools Used
-
-List the tools and commands used during the practical.
-
-3. Methodology
-
-Describe the steps followed to gather and examine information.
-
-4. Findings
-
-Present the results in a table.
-
-Finding
-
-Evidence
-
-Interpretation
-
-Host information
-
-
-
-
-
-Network configuration
-
-
-
-
-
-Open ports
-
-
-
-
-
-Service identification
-
-
-
-
-
-HTTP response
-
-
-
-
-
-5. Screenshots
-
-Insert the screenshots and provide a short explanation under each one.
-
-6. Security Recommendations
-
-Explain what should be improved, if anything, based on the actual evidence.
-
-7. Conclusion
-
-Summarize the results and lessons learned.
+**End of Assignment**
