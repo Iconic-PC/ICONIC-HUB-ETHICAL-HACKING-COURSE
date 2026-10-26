@@ -1,0 +1,579 @@
+# Automated SQL Injection Testing with SQLmap: Exercises 7–10
+
+## Introduction
+
+In Exercises 1–6, we explored SQL injection through manual testing. We examined how unexpected input can affect SQL queries, trigger database errors, change query logic, and potentially expose information.
+
+In this section, we introduce **SQLmap**, an automated tool used to detect and test SQL injection vulnerabilities in authorized environments.
+
+SQLmap helps security testers automate tasks that would otherwise require many manual requests. Depending on the application's behavior, database type, permissions, and testing configuration, it can help identify injectable parameters and examine database information.
+
+These exercises use OWASP Mutillidae II, a deliberately vulnerable web application designed for security training.
+
+> **Important:** Use SQLmap only against your own lab or systems for which you have explicit authorization. Database enumeration and data extraction can expose sensitive information. The commands below are intended for the isolated Mutillidae training environment.
+
+---
+
+# Understanding SQLmap Before Starting
+
+## What Is SQLmap?
+
+SQLmap is an open-source penetration-testing tool that automates the detection and exploitation of SQL injection vulnerabilities.
+
+Instead of manually entering test input into a web form repeatedly, a tester can provide SQLmap with an HTTP request and ask it to investigate whether a parameter is vulnerable.
+
+Depending on the test results and database permissions, SQLmap may be able to identify database information, enumerate tables and columns, or retrieve records during an authorized assessment.
+
+## How Does SQLmap Work?
+
+A simplified workflow looks like this:
+
+1. The tester identifies a potentially vulnerable application parameter.
+2. SQLmap sends controlled test requests to the application.
+3. It compares responses and looks for evidence of SQL injection.
+4. If it identifies a supported injection technique, it may attempt further database enumeration.
+5. The tester examines the output and documents the evidence.
+
+SQLmap does not guarantee success. A request may fail because the URL is incorrect, the vulnerable parameter is missing, authentication is required, the request uses POST data, or the application handles input safely.
+
+## Understanding the `-u` Option
+
+In SQLmap, the `-u` option specifies the target URL.
+
+For example:
+
+```bash
+sqlmap -u "http://192.168.56.107/mutillidae/index.php?page=user-info.php"
+```
+
+This tells SQLmap which URL to test.
+
+However, this URL contains a `page` parameter, and the application may use that parameter only to select a page rather than to construct the vulnerable database query.
+
+**A URL containing a parameter does not automatically mean that the parameter is injectable.** SQLmap must receive the actual request and input that reach the database query.
+
+In your Mutillidae lab, the User Lookup page contains Name and Password fields. If these fields submit a POST request, you may need to capture the complete request in Burp Suite and save it to a file for SQLmap to test.
+
+For example, after capturing your own authorized lab request and saving it as `request.txt`, you can use:
+
+```bash
+sqlmap -r request.txt
+```
+
+Here, `-r` tells SQLmap to read the HTTP request from the specified file.
+
+Use the real request captured from your own browser. Do not assume that the example URL in the original handout contains the correct parameter names or page path.
+
+---
+
+# Exercise 7: Basic SQLmap Commands
+
+## Objective
+
+Learn how to use SQLmap to test a potentially vulnerable request and understand basic database enumeration.
+
+## Part A: Check for SQL Injection and Enumerate Databases
+
+The original handout uses the `--dbs` option.
+
+A request-based example for the isolated lab is:
+
+```bash
+sqlmap -r request.txt --dbs
+```
+
+### Breaking down the command
+
+| Command component | Meaning |
+|---|---|
+| `sqlmap` | Starts the SQLmap program. |
+| `-r request.txt` | Loads the HTTP request captured from the lab. |
+| `--dbs` | Requests enumeration of databases that SQLmap can identify through the tested database connection. |
+
+### What happens when you run it?
+
+SQLmap sends test requests based on the supplied HTTP request. It attempts to determine whether the request contains an injectable parameter.
+
+If SQL injection is confirmed and the database supports the required technique, SQLmap may enumerate database names accessible through that connection.
+
+Possible outcomes include:
+
+- SQLmap identifies a potentially injectable parameter.
+- SQLmap reports that the parameter does not appear injectable.
+- SQLmap encounters a connection or request error.
+- SQLmap identifies an injection technique but cannot enumerate databases.
+- SQLmap successfully lists database names.
+
+Each outcome must be interpreted based on the actual output.
+
+### Why might the command fail?
+
+Possible reasons include:
+
+- The request file does not contain the correct HTTP request.
+- The application is no longer running.
+- The target IP address is incorrect.
+- The request requires a valid session or authentication cookie.
+- The tested parameter does not reach a SQL query.
+- The application or database prevents the attempted operation.
+
+A failed test is not automatically proof that the application is secure.
+
+## Part B: Retrieve the Current Database
+
+The original handout also introduces:
+
+```bash
+sqlmap -r request.txt --current-db
+```
+
+### What does `--current-db` mean?
+
+The `--current-db` option asks SQLmap to identify the database selected as the current database for the database connection, if this information can be retrieved.
+
+For example, a database server may host several databases, but a particular application connection may operate within one selected database.
+
+Knowing the current database can help a tester understand which part of the database environment is being used by the application.
+
+### Difference Between `--dbs` and `--current-db`
+
+| Option | Purpose |
+|---|---|
+| `--dbs` | Attempts to enumerate database names. |
+| `--current-db` | Attempts to identify the current database. |
+
+These options provide different types of information. One asks what databases can be identified; the other asks which database is currently selected.
+
+## Real-Life Example 1: Online Shopping Website
+
+Imagine an online shopping website that stores product information, customer accounts, orders, and inventory in a database.
+
+A security tester is authorized to assess the application's search feature.
+
+If the search parameter is vulnerable to SQL injection, SQLmap may help the tester establish the vulnerability and determine whether database names can be enumerated.
+
+This could reveal that the application connects to a database containing customer or order information.
+
+The discovery does not automatically mean all those records are accessible. The tester must evaluate the actual permissions and exposure.
+
+## Real-Life Example 2: University Portal
+
+Imagine a university portal that uses a database for student registrations, course enrolments, and examination records.
+
+During an authorized security assessment, a tester discovers that a parameter in the student search feature may be vulnerable.
+
+SQLmap can help investigate the parameter and, if the vulnerability permits it, identify database information.
+
+This can help the university understand the potential scope of the issue and prioritize remediation before student information is exposed.
+
+## Exercise 7: Key Lesson
+
+**SQLmap automates testing, but it still needs the correct HTTP request and a parameter that actually interacts with the database.** Database enumeration should only be attempted within the approved scope of the assessment.
+
+---
+
+# Exercise 8: Understanding Database Users and Password Information
+
+## Objective
+
+Understand the difference between database accounts and application users, and learn what SQLmap's database-user enumeration options mean.
+
+## Part A: Enumerate Database Users
+
+The original handout includes the following command:
+
+```bash
+sqlmap -r request.txt --users
+```
+
+### What does `--users` do?
+
+The `--users` option asks SQLmap to enumerate database management system (DBMS) user accounts, if supported and permitted by the current connection.
+
+These are accounts used to access or administer the database server.
+
+They are not necessarily the same as the usernames registered in the website.
+
+For example, an application may have thousands of customer accounts but use only one database service account to communicate with the database.
+
+### Database users versus website users
+
+| Database users | Website users |
+|---|---|
+| Accounts used to authenticate to the database server | People who use the web application |
+| May have permissions to read or modify database objects | May have roles such as customer, student, or administrator |
+| Often managed by database administrators | Often managed by application administrators |
+| Example: an application service account | Example: a student's portal account |
+
+The distinction is important because enumerating database accounts does not automatically retrieve the application's customer list.
+
+## Part B: Understand the `--passwords` Option
+
+The handout also includes:
+
+```bash
+sqlmap -r request.txt --passwords
+```
+
+### What does `--passwords` do?
+
+SQLmap's `--passwords` option attempts to retrieve database account password hashes when the database system, privileges, and circumstances allow it.
+
+A password hash is a value generated from a password using a hashing process. It is not necessarily the original password.
+
+SQLmap may also offer to perform additional processing on retrieved hashes, depending on the situation and available options.
+
+Password-hash retrieval is a sensitive operation. In a teaching lab, it should be performed only when explicitly included in the exercise scope and only against the disposable lab environment.
+
+### Important distinction
+
+The `--passwords` option does not simply mean “download all the passwords used by website customers.”
+
+It concerns database account password information that may be accessible through the database system. The option may fail or return no information if the required privileges or data are unavailable.
+
+## Why Is Password Hash Exposure Serious?
+
+If an attacker obtains password hashes, they may attempt offline password guessing against those hashes. The risk depends on how the passwords were hashed, the strength of the passwords, and whether appropriate password-storage practices were used.
+
+Database administrators should protect account credentials, restrict access to sensitive system tables, and use appropriate password-hashing and authentication mechanisms.
+
+## Real-Life Example 1: E-Commerce Database Server
+
+Imagine an online retailer whose application connects to its database using a service account.
+
+If the database account has excessive permissions, a vulnerability in the application may expose information that the application should not be able to retrieve.
+
+A security assessment may discover that the account has more privileges than required. This creates unnecessary risk if the application is compromised.
+
+The appropriate response is to restrict database permissions and ensure that credentials are stored and managed securely.
+
+## Real-Life Example 2: Corporate Employee Portal
+
+Imagine an employee portal used by a company to manage staff information.
+
+The application connects to a database using a dedicated account. If that account is granted database-administration privileges unnecessarily, a successful SQL injection vulnerability could have a greater impact than intended.
+
+A security tester should document the excessive permissions and recommend a dedicated, least-privileged account.
+
+The organization should also protect database credentials and avoid exposing password hashes or other authentication material through the application.
+
+## Exercise 8: Key Lesson
+
+**Database accounts and application accounts are different.** SQLmap's `--users` and `--passwords` options concern database-level account information, and their results depend on the database system and available privileges.
+
+---
+
+# Exercise 9: Understanding Database Dumping
+
+## Objective
+
+Understand what a database dump is, how SQLmap represents database and table selection, and why unauthorized data extraction is a serious security risk.
+
+## 1. What Is a Database Dump?
+
+A database dump is a collection of database records or database content retrieved for inspection, backup, migration, or analysis.
+
+In penetration testing, dumping data means retrieving records from a database during an authorized assessment.
+
+The information might include:
+
+- Product records
+- Employee details
+- Customer information
+- Order histories
+- Application configuration data
+
+The sensitivity of the data depends on the database and the table being examined.
+
+## 2. Understanding the Command Structure
+
+The original handout provides this command pattern:
+
+```bash
+sqlmap -r request.txt -D <database_name> -T <table_name> --dump
+```
+
+The placeholders must be replaced with the actual database and table names identified in the lab.
+
+### Breaking down the command
+
+| Component | Meaning |
+|---|---|
+| `sqlmap` | Starts SQLmap. |
+| `-r request.txt` | Loads the captured HTTP request. |
+| `-D <database_name>` | Specifies the database to examine. |
+| `-T <table_name>` | Specifies the table to examine. |
+| `--dump` | Requests retrieval of records from the selected table, if possible. |
+
+The angle-bracketed names are placeholders, not literal values to copy unchanged into the command.
+
+For example, `database_name` refers to the actual name of the database identified during the authorized lab.
+
+## 3. How Does SQLmap Know What to Retrieve?
+
+SQLmap must first have a working request and a confirmed or usable injection path.
+
+It then attempts to perform the requested database operation through that path.
+
+The operation may fail because:
+
+- The selected database does not exist.
+- The selected table does not exist.
+- The account lacks the required permissions.
+- The original request is incorrect.
+- SQL injection was not confirmed.
+- The database or application prevents the operation.
+
+A dump command should not be interpreted as proof that records were retrieved. The output must confirm what happened.
+
+## 4. Why Should Data Dumping Be Controlled?
+
+Dumping an entire table can expose more information than necessary.
+
+During professional security testing, the tester should follow the agreed scope and use the minimum evidence required to demonstrate impact.
+
+For example, a finding may be demonstrated by retrieving a small, non-sensitive test record from a disposable training database rather than collecting every record.
+
+Sensitive information discovered accidentally should be handled according to the assessment's reporting and data-handling rules.
+
+## Real-Life Example 1: Online Retailer
+
+Imagine a retail company stores customers, products, orders, and shipping details in a database.
+
+If an application is vulnerable to SQL injection and the database account can access customer records, an attacker might be able to retrieve information beyond the intended application response.
+
+A successful data dump could expose customer details or order histories, potentially leading to privacy violations and financial or reputational damage.
+
+The organization should use parameterized queries, restrict database permissions, and monitor suspicious database access.
+
+## Real-Life Example 2: Hospital Records System
+
+Imagine a hospital stores patient details, appointment information, and medical records in a database.
+
+If a vulnerable application permits unauthorized record retrieval, the consequences could be severe because health information is highly confidential.
+
+An authorized tester should avoid collecting unnecessary patient data and should use synthetic or test records whenever possible.
+
+The hospital should fix the injection vulnerability, review database access permissions, and investigate whether unauthorized access has occurred.
+
+## Exercise 9: Key Lesson
+
+**Database dumping is a data-access operation, not merely a test message.** It must be authorized, narrowly scoped, and supported by evidence showing exactly what was retrieved.
+
+---
+
+# Exercise 10: Understanding Tables and Columns
+
+## Objective
+
+Learn how database tables and columns are organized and understand how SQLmap can enumerate column information during an authorized assessment.
+
+## 1. What Is a Database Table?
+
+A table stores related information in rows and columns.
+
+For example, an application may have a table called `accounts`.
+
+A simplified example could look like this:
+
+| account_id | username | email |
+|---|---|---|
+| 1 | student01 | student01@example.test |
+| 2 | student02 | student02@example.test |
+
+Each row represents a record. Each column represents a particular field.
+
+This example uses fictional test data.
+
+## 2. What Is a Column?
+
+A column defines a particular type of information stored in a table.
+
+For example:
+
+- `account_id` may store a unique account identifier.
+- `username` may store the account's username.
+- `email` may store the account's email address.
+
+Knowing a column's name helps a developer or tester understand the database's structure.
+
+However, knowing that a column exists does not automatically grant permission to read its values.
+
+## 3. Understanding SQLmap's `--columns` Option
+
+The original handout provides the following command pattern:
+
+```bash
+sqlmap -r request.txt -D <database_name> -T <table_name> --columns
+```
+
+### Breaking down the command
+
+| Component | Meaning |
+|---|---|
+| `sqlmap` | Starts the tool. |
+| `-r request.txt` | Loads the HTTP request to test. |
+| `-D <database_name>` | Specifies the database. |
+| `-T <table_name>` | Specifies the table. |
+| `--columns` | Attempts to enumerate columns belonging to the selected table. |
+
+Replace the placeholders with the actual names found in the authorized lab.
+
+The option requests column metadata. It does not, by itself, dump every record from the table.
+
+## 4. Why Does Column Enumeration Matter?
+
+Column enumeration helps the tester understand the table's structure.
+
+For example, discovering columns named `username`, `email`, or `role` may indicate that the table contains account-related information.
+
+A column named `password_hash` may indicate that password hashes are stored there, although the actual contents and security of the implementation must be verified.
+
+Column names are clues about database structure, not proof that the corresponding information is exposed to an unauthorized user.
+
+## 5. Applying This to Mutillidae
+
+The observed Mutillidae query references the `accounts` table:
+
+```sql
+SELECT * FROM accounts
+```
+
+Therefore, students should not assume that a table named `users` exists.
+
+They should establish the correct database and table names from the lab's actual output before attempting enumeration.
+
+If SQLmap reports that a table cannot be found, possible explanations include an incorrect name, an incorrect database selection, insufficient privileges, or a failed injection path.
+
+The report should describe the actual result rather than assuming the operation succeeded.
+
+## Real-Life Example 1: E-Commerce Application
+
+Imagine an online store with an `orders` table containing order identifiers, customer identifiers, totals, and timestamps.
+
+Column enumeration could reveal how the order records are organized.
+
+If an application is vulnerable, that structural information may help a tester determine whether confidential order data is at risk.
+
+The organization should restrict access to sensitive tables and ensure that user-controlled values cannot modify SQL statements.
+
+## Real-Life Example 2: School Management System
+
+Imagine a school database with tables for students, courses, results, and registrations.
+
+A results table might contain columns representing student identifiers, course codes, grades, and semester information.
+
+If an application vulnerability exposes metadata, an attacker may learn how the school stores academic information.
+
+The school should address the underlying injection vulnerability, restrict database permissions, and ensure that students can access only records they are authorized to view.
+
+## Exercise 10: Key Lesson
+
+**Tables contain records, while columns define the fields within those records.** SQLmap's `--columns` option requests structural information; it is different from dumping the table's data.
+
+---
+
+# Comparing Exercises 7–10
+
+| Exercise | SQLmap option | Main purpose |
+|---|---|---|
+| 7. Basic Commands | `--dbs`, `--current-db` | Enumerate database names and identify the current database |
+| 8. Database Users and Passwords | `--users`, `--passwords` | Investigate database account names and accessible password-hash information |
+| 9. Dumping Data | `-D`, `-T`, `--dump` | Request records from a selected database table |
+| 10. Tables and Columns | `-D`, `-T`, `--columns` | Request column metadata for a selected table |
+
+# Troubleshooting SQLmap in the Mutillidae Lab
+
+If SQLmap does not behave as expected, check the following items before drawing a conclusion.
+
+## 1. Verify the IP Address
+
+Your current Mutillidae lab was previously accessed at:
+
+```text
+http://192.168.56.107/mutillidae/
+```
+
+The handout's `192.168.177.134` address may belong to a different VM configuration or an earlier lab session.
+
+Confirm the current address in your own environment.
+
+## 2. Verify the Page Name
+
+The observed page was:
+
+```text
+index.php?page=user-info.php
+```
+
+The handout instead uses `userinfo.php`.
+
+These paths are not identical. Use the actual working page from your lab.
+
+## 3. Check Whether the Request Uses GET or POST
+
+A URL can contain GET parameters, while a web form may submit its fields through POST.
+
+If the Name and Password fields are submitted through POST, a URL-only test may not include the input that reaches the database query.
+
+Capture the request in Burp Suite and use SQLmap's `-r` option to test that request in your authorized environment.
+
+## 4. Check Authentication and Session State
+
+Some pages require a valid session or login.
+
+If the captured request lacks the necessary cookies or session information, SQLmap may not reach the same application state as your browser.
+
+Capture a fresh request after navigating to the correct page.
+
+## 5. Interpret Results Carefully
+
+A message such as “parameter does not appear to be injectable” is not the same as a guarantee that the entire application is secure.
+
+Likewise, an SQL error does not prove that database extraction succeeded.
+
+Record the exact output, verify the request, and distinguish between confirmed findings and unsuccessful tests.
+
+---
+
+# Recommended Security Controls
+
+Organizations can reduce SQL injection risk through the following measures.
+
+## 1. Parameterized Queries
+
+Parameterized queries separate SQL instructions from user input. They are a primary defense against SQL injection.
+
+## 2. Least-Privilege Database Accounts
+
+Each application should use a database account with only the permissions required for its functions.
+
+An ordinary application account should not automatically have database-administration privileges.
+
+## 3. Secure Error Handling
+
+Applications should not display raw database errors or internal query details to ordinary users.
+
+Technical errors should be logged securely for authorized investigation.
+
+## 4. Strong Credential Protection
+
+Database credentials should be stored and managed securely. Application passwords should be stored using suitable password-hashing mechanisms rather than plain text.
+
+## 5. Authorized Security Testing
+
+Regular security assessments can help organizations identify vulnerabilities before attackers exploit them. Testing should follow an approved scope and should avoid unnecessary collection of sensitive data.
+
+---
+
+# Final Conclusion
+
+Exercises 7–10 introduce automated SQL injection testing with SQLmap.
+
+Students learn how SQLmap can investigate a request, enumerate database names, identify database-level accounts, request database records, and examine table columns.
+
+These capabilities make SQLmap useful in an authorized penetration test, but the tool does not guarantee that every operation will succeed. Its results depend on the actual request, the vulnerability, the database system, and the permissions available to the application.
+
+When conducting a professional assessment, students must record the evidence accurately, avoid unnecessary data extraction, explain the potential impact, and recommend appropriate security controls.
+
+**Remember: automated testing does not replace understanding. A responsible ethical hacker must be able to explain what a command does, why it was used, what the output proves, and how the underlying vulnerability should be fixed.**
